@@ -12,6 +12,15 @@ class ModelName(models.Model):
 
     @api.constrains('code')
     def _check_code(self):
+        """
+           Ensure that the treatment code does not contain the sequence '026'.
+
+           Raises
+           ------
+           UserError
+               If any treatment code contains the sequence '026'.
+
+        """
         to_checks = self.filtered(lambda treatment: treatment.code and '026' in treatment.code)
         if to_checks:
             raise UserError(_(
