@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--Sequence for patient-->
+    <record id="vertical_patient_hospital_seq" model="ir.sequence">
+        <field name="name">Sequence for patient in vertical hospital</field>
+        <field name="code">vertical_hospital.patient</field>
+        <field name="prefix">PA</field>
+        <field name="padding">5</field>
+    </record>
+
+</odoo>

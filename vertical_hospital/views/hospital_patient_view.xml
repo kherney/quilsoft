@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="patient_form_view" model="ir.ui.view">
+        <field name="name">patient_form_view</field>
+        <field name="model">hospital.patient</field>
+        <field name="arch" type="xml">
+            <form string="Patient">
+                <!--Invisible Fields-->
+                <field name="code" invisible="True"/>
+                <header>
+                    <field name="state" widget="statusbar" options="{'clickable': '1'}"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name" string="Patient"/>
+                        <h1>
+                            <field name="display_name"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="name" placeholder="Name and Surname"/>
+                            <field name="dni"/>
+                            <field name="treatment_id" options="{'no_create': True, 'no_edit': True}"/>
+                        </group>
+                        <group>
+                            <field name="release_date"/>
+                            <field name="update_date"/>
+                        </group>
+                    </group>
+                    <notebook invisible="not treatment_ids">
+                        <page name="treatments" string="Treatment">
+                            <field name="treatment_ids" nolabel="1" readonly="True" force_save="1">
+                                <tree>
+                                    <field name="code" force_save="1"/>
+                                    <field name="name" force_save="1"/>
+                                </tree>
+                            </field>
+
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" groups="base.group_user"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="patient_tree_view" model="ir.ui.view">
+        <field name="name">patient.tree.tree</field>
+        <field name="model">hospital.patient</field>
+        <field name="arch" type="xml">
+            <tree string="Patient">
+                <field name="code"/>
+                <field name="name"/>
+                <field name="dni"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="patient_act_window" model="ir.actions.act_window">
+        <field name="name">Patient</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">hospital.patient</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                There is no patient. Click new to adds patient.
+            </p>
+        </field>
+    </record>
+
+    <!-- QWeb Reports -->
+    <record id="action_list_patient" model="ir.actions.report">
+        <field name="name">Patient</field>
+        <field name="model">hospital.patient</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">vertical_hospital.list_patient_template</field>
+        <field name="report_file">vertical_hospital.list_patient_template</field>
+        <field name="print_report_name">'List Patient'</field>
+        <field name="binding_model_id" ref="model_hospital_patient"/>
+        <field name="binding_type">report</field>
+        <field name="binding_view_types">list</field>
+        <field name="groups_id" eval="[(4, ref('vertical_hospital.group_hospital_doctor')),]"/>
+    </record>
+
+</odoo>

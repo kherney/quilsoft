@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="res_config_settings_hospital_view_form" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.hospital</field>
+        <field name="model">res.config.settings</field>
+        <field name="priority" eval="10"/>
+        <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="inside">
+                <app data-string="Vertical Hospital" string="Vertical Hospital" name="vertical_hospital" groups="vertical_hospital.group_hospital_doctor">
+                    <block title="Configurations" name="setting"
+                           invisible="not is_root_company">
+                        <setting string="Web service"
+                                 help="Manage Webserives">
+                            <div class="content-group">
+                                <div class="mt16">
+                                    <div>
+                                        <label for="enable_endpoint_hospital" string="Enable endpoint" class="col-2 o_light_label"/>
+                                        <field name="enable_endpoint_hospital"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </setting>
+                    </block>
+                </app>
+            </xpath>
+        </field>
+    </record>
+</odoo>

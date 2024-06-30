@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--Root menu for vertical hospital-->
+    <menuitem name="V. Hospital"
+        id="root_hospital_menu"
+        groups="group_hospital_doctor"
+        web_icon="vertical_hospital,static/description/icon.png"
+        sequence="1"/>
+
+    <menuitem name="Patients"
+              id="patient_menu"
+              parent="vertical_hospital.root_hospital_menu"
+              action="vertical_hospital.patient_act_window"/>
+
+    <menuitem name="Treatment"
+              id="treatment_menu"
+              parent="vertical_hospital.root_hospital_menu"
+              action="vertical_hospital.treatment_act_window"/>
+</odoo>
